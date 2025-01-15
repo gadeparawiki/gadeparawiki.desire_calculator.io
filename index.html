@@ -66,13 +66,13 @@
 
         for _ in range(iteration):
           for target_desire in target_desire_list:
-            desire_count = 0
             while desire_count < target_desire:
               count+=1
               if count % 10 == 0:
                 desire_count += 5 * choice_magnification()
               elif np.random.choice(items, 1, p=probability)[0] == 'desire':
                 desire_count += 2 * choice_magnification()
+            desire_count -= target_desire
 
         print(f'{count/iteration}回')
         output_div = document.querySelector("#output")
