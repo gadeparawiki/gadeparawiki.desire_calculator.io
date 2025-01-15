@@ -21,6 +21,7 @@ magnification_probability = [0.89, 0.09, 0.02]
 def choice_magnification():
   return np.random.choice(magnification, 1, p=magnification_probability)[0]
 
+# メインロジック
 def calc_pray_count(event):
   # htmlからの入力処理
   input_text = document.querySelector("#required_desire")
@@ -34,13 +35,13 @@ def calc_pray_count(event):
 
   for _ in range(iteration):
     for target_desire in target_desire_list:
-      desire_count = 0
       while desire_count < target_desire:
         count+=1
         if count % 10 == 0:
           desire_count += 5 * choice_magnification()
         elif np.random.choice(items, 1, p=probability)[0] == 'desire':
           desire_count += 2 * choice_magnification()
+      desire_count -= target_desire
 
   print(f'{count/iteration}回')
   output_div = document.querySelector("#output")
